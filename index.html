@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Honolulu Trip</title>
+<style>
+:root{--bg:#f6f8fb;--card:#fff;--ink:#1d2939;--muted:#667085;--accent:#1f4e78;--nav-h:56px}
+@media (prefers-color-scheme:dark){:root{--bg:#101828;--card:#1d2939;--ink:#f2f4f7;--muted:#98a2b3;--accent:#7cb7e6}}
+*{box-sizing:border-box}
+body{margin:0;font-family:system-ui,-apple-system,Arial,sans-serif;background:var(--bg);color:var(--ink);padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px);-webkit-tap-highlight-color:transparent}
+header{background:var(--accent);color:#fff;padding:14px 16px}
+h1{margin:0;font-size:18px;line-height:1.25}
+#status{font-size:12px;opacity:.85;margin-top:4px}
+nav{display:flex;gap:8px;padding:8px 10px;overflow-x:auto;position:sticky;top:0;background:var(--bg);z-index:3;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+nav::-webkit-scrollbar{display:none}
+nav button{border:0;border-radius:999px;min-height:44px;padding:10px 16px;background:var(--card);color:var(--ink);font-size:15px;white-space:nowrap;flex:0 0 auto}
+nav button.on{background:var(--accent);color:#fff}
+main{padding:0 12px calc(32px + env(safe-area-inset-bottom,0px));max-width:640px;margin:auto;min-width:0}
+#plan{min-width:0}
+.card{background:var(--card);border-radius:14px;padding:14px;margin:10px 0;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.card h2{margin:0 0 4px;font-size:17px}
+.muted{color:var(--muted);font-size:13px}
+.opt{margin-top:10px;font-size:14px;line-height:1.45}
+.opt b{display:block;color:var(--accent);font-size:12px;text-transform:uppercase;letter-spacing:.03em}
+.chips a{display:inline-block;margin:6px 6px 0 0;padding:8px 12px;border-radius:999px;background:var(--bg);font-size:13px;color:var(--accent);text-decoration:none;min-height:36px}
+a{color:var(--accent)}
+h3{margin:18px 4px 4px;font-size:15px;color:var(--accent)}
+.item{padding:10px 0;border-bottom:1px solid rgba(128,128,128,.2);font-size:14px}
+.item strong{display:block}
+.table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -4px}
+table{width:100%;border-collapse:collapse;font-size:14px;min-width:280px}
+td,th{padding:10px 6px;border-bottom:1px solid rgba(128,128,128,.2);text-align:left}
+.hidden{display:none}
+.now{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.now-temp{font-size:42px;line-height:1;font-weight:700;letter-spacing:-.02em}
+.now-temp small{display:block;font-size:16px;font-weight:600;opacity:.85;margin-top:4px}
+.now-meta{font-size:14px;line-height:1.5}
+.now-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px 12px;margin-top:14px;font-size:14px}
+.now-grid span{color:var(--muted);display:block;font-size:12px;text-transform:uppercase;letter-spacing:.03em}
+.plan-tools{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:8px 0 4px;padding:0 2px}
+.plan-tools .muted{margin:0}
+.plan-tools .tool-btns{display:flex;gap:6px}
+.plan-tools button{border:0;background:var(--card);color:var(--accent);font-size:13px;font-weight:600;min-height:36px;padding:6px 12px;border-radius:999px;box-shadow:0 1px 2px rgba(0,0,0,.06)}
+#day-jump{display:flex;gap:8px;margin:0 -12px;padding:8px 12px 12px;width:calc(100% + 24px);max-width:calc(100% + 24px);min-width:0;box-sizing:border-box;overflow-x:auto;overflow-y:hidden;position:sticky;top:var(--nav-h);z-index:2;background:var(--bg);scrollbar-width:thin;scrollbar-color:rgba(128,128,128,.45) transparent;-webkit-overflow-scrolling:touch;scroll-snap-type:x proximity;overscroll-behavior-x:contain}
+#day-jump::-webkit-scrollbar{height:4px}
+#day-jump::-webkit-scrollbar-thumb{background:rgba(128,128,128,.45);border-radius:999px}
+#day-jump::after{content:"";flex:0 0 24px}
+#day-jump button{border:1px solid rgba(128,128,128,.25);background:var(--card);color:var(--ink);border-radius:12px;min-height:44px;min-width:64px;padding:8px 12px;font-size:13px;font-weight:600;white-space:nowrap;flex:0 0 auto;scroll-snap-align:start}
+#day-jump button.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.day{background:var(--card);border-radius:14px;margin:8px 0;box-shadow:0 1px 3px rgba(0,0,0,.08);overflow:hidden;scroll-margin-top:calc(var(--nav-h) + 64px)}
+.day-summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:10px;padding:14px;min-height:56px;user-select:none}
+.day-summary::-webkit-details-marker{display:none}
+.day-summary::after{content:"";width:8px;height:8px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:rotate(45deg);margin-left:auto;flex:0 0 auto;transition:transform .15s ease}
+.day[open] > .day-summary::after{transform:rotate(-135deg)}
+.day-summary .day-text{min-width:0;flex:1}
+.day-summary .day-title{font-size:15px;font-weight:650;line-height:1.25;margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.day-summary .day-sub{color:var(--muted);font-size:12px;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.day-body{padding:0 14px 14px;border-top:1px solid rgba(128,128,128,.15)}
+.day-body .opt:first-child{margin-top:12px}
+@media (min-width:640px){
+  h1{font-size:20px}
+  main{padding-left:16px;padding-right:16px}
+}
+</style>
+</head>
+<body>
+<header>
+  <h1>Honolulu Trip: Nov 30 to Dec 11</h1>
+  <div id="status">Loading your sheet...</div>
+</header>
+<nav id="tabs"></nav>
+<main>
+  <section id="plan"></section>
+  <section id="details" class="hidden"></section>
+  <section id="weather" class="hidden"></section>
+  <section id="budget" class="hidden"></section>
+</main>
+
+<script>
+// The page reads days.csv and details.csv from this same folder. Edit those files in GitHub to update the trip.
+const EMBEDDED_DAYS = `ISO,Date,Title,Walk_Bus,Rideshare,Car_Backup,Tour,Low,High,Places
+2026-11-30,Nov 30 (Mon),Arrival,Rideshare from the airport with luggage. Bus is hard with bags.,About $30 to $40 from HNL to Waikiki.,Not needed on arrival.,None,75,105,Honolulu International Airport; Waikiki Malia by Outrigger
+2026-12-01,Dec 1 (Tue),Diamond Head and Waikiki,"Walk to Diamond Head for the 5:30 AM sunrise (book the State Parks slot). Sweet Home Cafe, Waiola shave ice, Waikiki Beach, sunset at Kapiolani Park.","Rideshare to Diamond Head, about $12 to $18 each way.",Not needed.,"Waikiki Trolley 1-day pass, about $55 to $65 per adult.",90,160,Diamond Head State Monument; Sweet Home Cafe; Waiola Shave Ice; Kapiolani Park
+2026-12-02,Dec 2 (Wed),Pearl Harbor,"TheBus Route 20 to Pearl Harbor. Arizona Memorial on your recreation.gov reservation. Optional Aiea Loop in the morning.","About $40 to $60 round trip for both.","Car for one day from a Waikiki branch, no hotel parking.",Pearl Harbor tours include the memorial; compare prices.,94,164,Pearl Harbor Visitor Center; Maunakea Marketplace; Aiea Loop Trailhead
+2026-12-03,Dec 3 (Thu),Hanauma Bay,"TheBus to Hanauma Bay (reservation required). Walk about 20 minutes from the stop. Koko Crater only if open. Rainbow Drive-In dinner.","About $50 to $70 round trip.","Easy by car, with parking at Hanauma.",Snorkel tours also run to Hanauma; book early.,142,220,Hanauma Bay Nature Preserve; Koko Head District Park; Rainbow Drive-In
+2026-12-04,Dec 4 (Fri),North Shore,"TheBus Route 60 to Haleiwa, Waimea Valley, shrimp truck, Matsumoto Shave Ice. Allow 2 to 3 hours each way.","About $90 or more each way. Plan ahead.","Good car day: Dole, Waimea, Haleiwa, Sunset Beach.","Circle Island tour (Fil-Am about $37.50 per person, or Aina Tours). Includes Dole.",84,190,Waimea Valley; Haleiwa Town; Giovanni's Shrimp Truck; Matsumoto Shave Ice; Dole Plantation
+2026-12-05,Dec 5 (Sat),Manoa Falls and Kapahulu,"TheBus Route 13 to the Manoa Falls trailhead. Walk the rainforest trail, then walk to Kapahulu for Leonard's and Ono Seafood.","About $40 to $60 round trip.",Park at the trailhead.,Not needed.,92,160,Manoa Falls Trailhead; Leonard's Bakery; Ono Seafood
+2026-12-06,Dec 6 (Sun),Makapu'u and whales,"TheBus to Makapu'u Point for sunrise. Lighthouse trail (2 miles round trip). Watch whales from shore or walk to Kewalo Basin.","About $50 to $70 round trip.",Early car arrival; Makapu'u parking fills up.,"Whale-watching cruise from Kewalo Basin, about $150 for two.",92,160,Makapu'u Lighthouse Trail; Kewalo Basin; Ramen Nakamura
+2026-12-07,Dec 7 (Mon),Lanikai and Kailua,"TheBus to Kailua. Walk to the Lanikai Pillbox (short, steep, sunrise). Kailua Beach Park. Kalapawai Cafe. Maunawili Falls optional.","About $70 to $100 for Lanikai, Pali Lookout, and Maunawili Falls.",Early car helps for Pillbox parking.,Not needed.,72,120,Lanikai Pillbox Trail; Kailua Beach Park; Kalapawai Cafe; Maunawili Falls; Nuuanu Pali Lookout
+2026-12-08,Dec 8 (Tue),Windward day,"TheBus to Ho'omaluhia Botanical Garden and Kawainui Marsh. A relaxed day.","About $100 to $180 for Byodo-In and Ho'omaluhia.","Car day: Byodo-In, Ho'omaluhia, and Kawainui in one loop.",Windward or circle tour covers Byodo-In.,72,125,Ho'omaluhia Botanical Garden; Kawainui Marsh; Byodo-In Temple; Kailua Beach Park
+2026-12-09,Dec 9 (Wed),Slow Waikiki day,"Walk Waikiki, Kuhio Beach, plate lunch. Optional Iolani Palace on TheBus Route 20.","About $80 or more each way to Makaha.",Car day for Makaha Beach Park and the west side.,"Waikiki Trolley 1-day pass, about $55 to $65 per adult.",80,160,Kuhio Beach; Royal Hawaiian Center; Iolani Palace; Makaha Beach Park
+2026-12-10,Dec 10 (Thu),Departure day,"Tantalus sunrise by rideshare. Bishop Museum by TheBus. Check out at noon, store bags. Punchbowl, then airport by rideshare.","Rideshare for Tantalus, Punchbowl, and the airport.",Return the car at the airport or a Waikiki branch.,None,202,282,Pu'u Ualaka'a State Park; Bishop Museum; National Memorial Cemetery of the Pacific; Honolulu International Airport
+2026-12-11,Dec 11 (Fri),Home,Arrive Vancouver at 7:49 AM.,,,,0,0,
+`;
+const EMBEDDED_DETAILS = `Section,Item,Detail,Link
+Transit,TheBus fare,"About $3 per adult per ride. Confirm the current fare.",https://thebus.org
+Transit,TheBus app,"Routes and live times. Search for TheBus or DaBus2 in your app store.",https://thebus.org
+Transit,HOLO card,"Reloadable fare card. Buy or load at TheBus outlets or through the HOLO app. Check daily caps.",https://thebus.org
+Transit,Bus tip,"Board at the front and pay. Some trailheads are a 10 to 20 minute walk from the stop.",
+Transit,TheBus map,"System map and route list. Handy before North Shore or Pearl Harbor days.",https://www.thebus.org/route-maps/
+Rideshare,Uber,"Your Canadian Uber account works in Honolulu. Use a card that works for US payments and check foreign transaction fees.",https://www.uber.com
+Rideshare,Lyft,"Availability in Honolulu is unclear. Check whether Honolulu shows in the app.",https://www.lyft.com
+Rideshare,Airport pickup,"Use the official pickup area at HNL. Allow extra time at night.",https://www.google.com/maps/search/?api=1&query=HNL+rideshare+pickup+Honolulu
+Car,Backup rental,"Rent from a Waikiki branch for Dec 8 or 9 to avoid hotel parking. Check your Canadian credit card's rental insurance first.",
+Car,Hotel parking,"Waikiki Malia self-parking is about $42 to $47 per day plus tax.",
+Tours,Waikiki Trolley,"Hop-on hop-off lines around Waikiki and beyond. 1-day all-lines pass about $55 to $65 per adult.",https://waikikitrolley.com
+Tours,Fil-Am Circle Island,"Budget circle-island day tour with hotel pickup. Confirm the price for your dates.",https://www.google.com/maps/search/?api=1&query=Fil-Am+Tours+Honolulu
+Tours,Aina Tours Circle Island,"Small group, highly rated. Check the price for your dates.",https://www.viator.com/tours/Honolulu/Circle-Island-Tour-small-group-setting-snorkeling-included/d59070-5563928P2
+Tours,Roberts Hawaii,"Big island operator for airport shuttles and sightseeing tours.",https://www.robertshawaii.com
+Tours,Polynesian Adventure,"Circle island and Pearl Harbor coach tours with Waikiki pickup.",https://www.polyad.com
+Reservations,Diamond Head,"Book the sunrise slot on the Hawaii State Parks reservation site. Slots fill fast.",https://gostateparks.hawaii.gov
+Reservations,USS Arizona Memorial,"Free tickets on recreation.gov. Book early.",https://www.recreation.gov
+Reservations,Hanauma Bay,"Reservation required. Check closure days before you book.",https://hanaumabaystatepark.com
+Reservations,Trail status,"Check Koko Crater, Makapu'u, and Lanikai trail status before you go.",https://www.honolulu.gov/dpr
+Hotel,Waikiki Malia,"2211 Kuhio Ave. Check-in from 10:10 PM on Nov 30. Check-out at 12:00 PM on Dec 10. Ask about bag storage and a lei greeting.",https://www.google.com/maps/search/?api=1&query=Waikiki+Malia+by+Outrigger+2211+Kuhio+Ave
+Hotel,Hotel website,"Outrigger property page for phone, parking, and amenity details.",https://www.outrigger.com/hotels-resorts/hawaii/oahu/waikiki-malia-by-outrigger
+Handy maps,Walmart Supercenter,"Closest full Walmart (Keeaumoku / near Ala Moana). About 15 to 25 min by bus or rideshare from the hotel. Groceries, sunscreen, gear.",https://www.google.com/maps/search/?api=1&query=Walmart+Supercenter+Keeaumoku+Honolulu
+Handy maps,Foodland Farms Ala Moana,"Full grocery near Ala Moana Center. Good for bigger shops than ABC Stores.",https://www.google.com/maps/search/?api=1&query=Foodland+Farms+Ala+Moana+Honolulu
+Handy maps,Times Supermarket Kapahulu,"Neighborhood grocery toward Kapahulu. Walkable or short rideshare from Waikiki Malia.",https://www.google.com/maps/search/?api=1&query=Times+Supermarket+Kapahulu+Honolulu
+Handy maps,Don Quijote Waikiki,"Open late. Snacks, drinks, souvenirs, basics a short walk from many Waikiki hotels.",https://www.google.com/maps/search/?api=1&query=Don+Quijote+Waikiki+Honolulu
+Handy maps,ABC Stores near hotel,"Convenience stores all over Waikiki for water, snacks, and reef-safe sunscreen.",https://www.google.com/maps/search/?api=1&query=ABC+Store+near+Waikiki+Malia+Honolulu
+Handy maps,CVS Pharmacy Waikiki,"Pharmacy and toiletries near Kalakaua / Waikiki.",https://www.google.com/maps/search/?api=1&query=CVS+Pharmacy+Waikiki+Honolulu
+Handy maps,Ala Moana Center,"Large mall for shopping, food court, and bus connections.",https://www.google.com/maps/search/?api=1&query=Ala+Moana+Center+Honolulu
+Handy maps,Grocery near hotel,"Google map of grocery and markets around Waikiki Malia.",https://www.google.com/maps/search/?api=1&query=grocery+store+near+Waikiki+Malia+by+Outrigger
+Handy maps,Tour pickup area,"Waikiki hotel tour-bus pickup corridor. Confirm your exact stop with the operator.",https://www.google.com/maps/search/?api=1&query=Waikiki+tour+bus+pickup+Kuhio+Avenue
+Packing,Clothes,"5 lightweight tops, 3 shorts, 1 pair of lightweight pants, 2 swimsuits, rash guard, light sweater, rain jacket, one nicer outfit.",
+Packing,Shoes and gear,"Trail shoes, sandals, water shoes, hat, sunglasses, reef-safe sunscreen (no oxybenzone or octinoxate), daypack, water bottle, towel, binoculars.",
+Food,Favorites,"Ono Seafood (poke), Rainbow Drive-In (plate lunch), Leonard's (malasadas), Liliha Bakery (coco puffs), Kono's (breakfast), Helena's (kalua pig), Waiola and Matsumoto (shave ice), Giovanni's and Romy's (shrimp).",
+Food,Coffee,"Waialua Estate (North Shore), Kalapawai Cafe (Kailua), Honolulu Coffee Company (Ala Moana).",
+Sun,Sunrise and sunset,"Check exact times before you go.",https://www.timeanddate.com/sun/usa/honolulu
+`;
+
+const CONFIG = {
+  days: "days.csv",
+  details: "details.csv",
+  lat: 21.281056,
+  lon: -157.828,
+  tz: "Pacific/Honolulu"
+};
+
+const tabs = ["Plan", "Details", "Weather", "Budget"];
+let days = [], details = [];
+
+function parseCSV(text) {
+  const rows = []; let row = [], field = "", quoted = false;
+  for (let i = 0; i < text.length; i++) {
+    const c = text[i];
+    if (quoted) {
+      if (c === '"') { if (text[i + 1] === '"') { field += '"'; i++; } else quoted = false; }
+      else field += c;
+    } else if (c === '"') quoted = true;
+    else if (c === ",") { row.push(field); field = ""; }
+    else if (c === "\n" || c === "\r") {
+      if (c === "\r" && text[i + 1] === "\n") i++;
+      row.push(field); rows.push(row); row = []; field = "";
+    } else field += c;
+  }
+  if (field || row.length) { row.push(field); rows.push(row); }
+  const head = rows.shift().map(h => h.trim());
+  return rows.filter(r => r.length > 1).map(r => Object.fromEntries(head.map((h, i) => [h, (r[i] || "").trim()])));
+}
+
+const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const money = n => "$" + Number(n).toLocaleString("en-US");
+const mapsLink = p => "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(p + ", Honolulu, HI");
+const shortDate = d => (d.Date || "").replace(/\s*\([^)]*\)\s*/g, "").trim() || d.ISO;
+const costLabel = d => (d.Low && d.Low !== "0") ? money(d.Low) + "–" + money(d.High) : "No cost";
+const honoluluToday = () => new Date().toLocaleDateString("en-CA", { timeZone: CONFIG.tz });
+
+function syncNavHeight() {
+  const nav = document.getElementById("tabs");
+  if (nav) document.documentElement.style.setProperty("--nav-h", nav.offsetHeight + "px");
+}
+
+function showTab(name) {
+  tabs.forEach(t => {
+    document.getElementById(t.toLowerCase()).classList.toggle("hidden", t !== name);
+  });
+  document.querySelectorAll("nav button").forEach(b => b.classList.toggle("on", b.dataset.t === name));
+  if (name === "Weather") loadWeather();
+  syncNavHeight();
+}
+
+function renderNav() {
+  document.getElementById("tabs").innerHTML = tabs.map(t => `<button type="button" data-t="${t}">${t}</button>`).join("");
+  document.querySelectorAll("nav button").forEach(b => b.onclick = () => showTab(b.dataset.t));
+  syncNavHeight();
+}
+
+function setDaysOpen(openAll) {
+  document.querySelectorAll("#plan details.day").forEach(el => { el.open = openAll; });
+}
+
+function openDay(iso, { accordion = false, scroll = false } = {}) {
+  const target = document.getElementById("day-" + iso);
+  if (!target) return;
+  if (accordion) {
+    document.querySelectorAll("#plan details.day").forEach(el => { el.open = el === target; });
+  } else {
+    target.open = true;
+  }
+  document.querySelectorAll("#day-jump button").forEach(b => b.classList.toggle("on", b.dataset.iso === iso));
+  if (scroll) target.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+function wirePlanControls() {
+  const expand = document.getElementById("expand-all");
+  const collapse = document.getElementById("collapse-all");
+  if (expand) expand.onclick = () => setDaysOpen(true);
+  if (collapse) collapse.onclick = () => setDaysOpen(false);
+  document.querySelectorAll("#day-jump button").forEach(b => {
+    b.onclick = () => openDay(b.dataset.iso, { accordion: true, scroll: true });
+  });
+  document.querySelectorAll("#plan details.day").forEach(el => {
+    el.addEventListener("toggle", () => {
+      if (!el.open) return;
+      const iso = el.id.replace(/^day-/, "");
+      document.querySelectorAll("#day-jump button").forEach(b => b.classList.toggle("on", b.dataset.iso === iso));
+    });
+  });
+}
+
+function renderPlan() {
+  const today = honoluluToday();
+  const openIso = days.some(d => d.ISO === today) ? today : (days[0] && days[0].ISO);
+  const jumper = `<div id="day-jump">${days.map(d =>
+    `<button type="button" data-iso="${esc(d.ISO)}" class="${d.ISO === openIso ? "on" : ""}">${esc(shortDate(d))}</button>`
+  ).join("")}</div>`;
+  const tools = `<div class="plan-tools">
+    <p class="muted">Tap a day to expand</p>
+    <div class="tool-btns">
+      <button type="button" id="expand-all">Expand all</button>
+      <button type="button" id="collapse-all">Collapse all</button>
+    </div>
+  </div>`;
+  const cards = days.map(d => {
+    const places = (d.Places || "").split(";").map(p => p.trim()).filter(Boolean);
+    const open = d.ISO === openIso ? " open" : "";
+    const opts = [
+      ["Walk and TheBus", d.Walk_Bus],
+      ["Rideshare", d.Rideshare],
+      ["Car backup", d.Car_Backup],
+      ["Tour option", d.Tour]
+    ].filter(([, v]) => v).map(([label, v]) => `<div class="opt"><b>${label}</b>${esc(v)}</div>`).join("");
+    return `<details class="day" id="day-${esc(d.ISO)}"${open}>
+      <summary class="day-summary">
+        <div class="day-text">
+          <p class="day-title">${esc(shortDate(d))} · ${esc(d.Title)}</p>
+          <p class="day-sub">${d.Low && d.Low !== "0" ? esc(costLabel(d)) + " for two" : "No cost"}</p>
+        </div>
+      </summary>
+      <div class="day-body">
+        ${opts}
+        <div class="chips">${places.map(p => `<a href="${mapsLink(p)}" target="_blank" rel="noopener">${esc(p)}</a>`).join("")}</div>
+      </div>
+    </details>`;
+  }).join("");
+  document.getElementById("plan").innerHTML = jumper + tools + cards;
+  wirePlanControls();
+  syncNavHeight();
+}
+
+function renderDetails() {
+  const sections = {};
+  details.forEach(d => (sections[d.Section] = sections[d.Section] || []).push(d));
+  document.getElementById("details").innerHTML = Object.keys(sections).map(s =>
+    `<h3>${esc(s)}</h3>` + sections[s].map(d =>
+      `<div class="item"><strong>${esc(d.Item)}</strong>${esc(d.Detail)}${d.Link ? ` <a href="${esc(d.Link)}" target="_blank" rel="noopener">Open</a>` : ""}</div>`
+    ).join("")
+  ).join("");
+}
+
+function renderBudget() {
+  const low = days.reduce((s, d) => s + Number(d.Low || 0), 0);
+  const high = days.reduce((s, d) => s + Number(d.High || 0), 0);
+  document.getElementById("budget").innerHTML = `<div class="card">
+    <h2>Trip total (two people, USD)</h2>
+    <p class="muted">Excludes flights and hotel. Based on the walk and TheBus plan.</p>
+    <div class="table-wrap"><table><tr><th>Date</th><th>Low</th><th>High</th></tr>
+    ${days.map(d => `<tr><td>${esc(d.Date)}</td><td>${money(d.Low)}</td><td>${money(d.High)}</td></tr>`).join("")}
+    <tr><th>Total</th><th>${money(low)}</th><th>${money(high)}</th></tr></table></div>
+  </div>`;
+}
+
+const WMO = {
+  0: "Clear sky", 1: "Mainly clear", 2: "Partly cloudy", 3: "Overcast",
+  45: "Fog", 48: "Icy fog",
+  51: "Light drizzle", 53: "Drizzle", 55: "Heavy drizzle",
+  61: "Light rain", 63: "Rain", 65: "Heavy rain",
+  66: "Freezing rain", 67: "Heavy freezing rain",
+  71: "Light snow", 73: "Snow", 75: "Heavy snow", 77: "Snow grains",
+  80: "Light showers", 81: "Showers", 82: "Heavy showers",
+  85: "Snow showers", 86: "Heavy snow showers",
+  95: "Thunderstorm", 96: "Thunderstorm with hail", 99: "Severe thunderstorm"
+};
+const wmoLabel = code => WMO[code] || "Unknown";
+const fmtDay = iso => {
+  const d = new Date(iso + "T12:00:00");
+  return d.toLocaleDateString([], { weekday: "short", month: "short", day: "numeric" });
+};
+const f2c = f => Math.round((Number(f) - 32) * 5 / 9);
+const tempBoth = f => `${Math.round(Number(f))}&deg;F / ${f2c(f)}&deg;C`;
+
+async function loadWeather() {
+  const el = document.getElementById("weather");
+  if (el.dataset.done) return;
+  el.innerHTML = `<div class="card"><h2>Honolulu weather</h2><p class="muted">Loading live conditions...</p></div>`;
+  const url = `https://api.open-meteo.com/v1/forecast?latitude=${CONFIG.lat}&longitude=${CONFIG.lon}` +
+    `&current=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,weather_code,wind_speed_10m` +
+    `&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max` +
+    `&temperature_unit=fahrenheit&wind_speed_unit=mph&timezone=${encodeURIComponent(CONFIG.tz)}&forecast_days=14`;
+  try {
+    const r = await fetch(url);
+    const j = await r.json();
+    if (!r.ok || !j.current || !j.daily) throw new Error(j.reason || "no forecast");
+    const c = j.current;
+    const updated = new Date(c.time).toLocaleString([], { weekday: "short", hour: "numeric", minute: "2-digit" });
+    const rows = j.daily.time.map((t, i) => `<tr>
+      <td>${esc(fmtDay(t))}</td>
+      <td>${esc(wmoLabel(j.daily.weather_code[i]))}</td>
+      <td>${tempBoth(j.daily.temperature_2m_max[i])}</td>
+      <td>${tempBoth(j.daily.temperature_2m_min[i])}</td>
+      <td>${j.daily.precipitation_probability_max[i] ?? "-"}%</td>
+    </tr>`).join("");
+    el.innerHTML = `
+      <div class="card">
+        <h2>Now in Honolulu</h2>
+        <p class="muted">Waikiki area · Open-Meteo · as of ${esc(updated)} HST</p>
+        <div class="now">
+          <div class="now-temp">${Math.round(c.temperature_2m)}&deg;F <small>${f2c(c.temperature_2m)}&deg;C</small></div>
+          <div class="now-meta"><strong>${esc(wmoLabel(c.weather_code))}</strong><br>Feels like ${tempBoth(c.apparent_temperature)}</div>
+        </div>
+        <div class="now-grid">
+          <div><span>Humidity</span>${c.relative_humidity_2m}%</div>
+          <div><span>Wind</span>${Math.round(c.wind_speed_10m)} mph</div>
+          <div><span>Rain</span>${c.precipitation ? c.precipitation + " mm" : "None"}</div>
+          <div><span>Trip dates</span>Forecast opens ~2 weeks ahead</div>
+        </div>
+      </div>
+      <div class="card">
+        <h2>Next 14 days</h2>
+        <p class="muted">Your Nov 30–Dec 11 forecast will fill in closer to the trip.</p>
+        <div class="table-wrap"><table>
+          <tr><th>Date</th><th>Sky</th><th>High</th><th>Low</th><th>Rain</th></tr>
+          ${rows}
+        </table></div>
+      </div>`;
+    el.dataset.done = "1";
+  } catch (e) {
+    el.innerHTML = `<div class="card"><h2>Weather unavailable</h2><p class="muted">Could not reach Open-Meteo. Check your connection and try again.</p></div>`;
+  }
+}
+
+async function load() {
+  const status = document.getElementById("status");
+  try {
+    let d = EMBEDDED_DAYS;
+    let x = EMBEDDED_DETAILS;
+    let source = "offline copy";
+    if (location.protocol === "http:" || location.protocol === "https:") {
+      try {
+        const [fd, fx] = await Promise.all([
+          fetch(CONFIG.days, { cache: "no-store" }).then(r => { if (!r.ok) throw 0; return r.text(); }),
+          fetch(CONFIG.details, { cache: "no-store" }).then(r => { if (!r.ok) throw 0; return r.text(); })
+        ]);
+        d = fd; x = fx; source = "your sheet";
+      } catch (_) { /* keep embedded */ }
+    }
+    days = parseCSV(d);
+    details = parseCSV(x);
+    renderPlan(); renderDetails(); renderBudget();
+    status.textContent = "Updated " + new Date().toLocaleTimeString([], { hour: "numeric", minute: "2-digit" }) + " from " + source;
+  } catch (e) {
+    status.textContent = "Could not load trip data.";
+  }
+}
+
+renderNav();
+showTab("Plan");
+load();
+setInterval(load, 10 * 60 * 1000);
+window.addEventListener("resize", syncNavHeight);
+</script>
+</body>
+</html>
