@@ -5,22 +5,41 @@ Transit,HOLO card,"Reloadable fare card. Buy or load at TheBus outlets or throug
 Transit,How to ride,"Board at the front and pay or tap HOLO. Pull the cord before your stop. Trailheads are often a 10 to 25 minute walk from the stop.",https://www.thebus.org
 Transit,Waikiki bus guide,"Fall 2026 Waikiki attraction and transfer cheat sheet from TheBus.",https://www.thebus.org/Updates/WaikikitabloidFall2026Update.pdf
 Transit,Google Maps Transit,"Best day-of tool from Waikiki Malia: set departure time and Public transit mode.",https://www.google.com/maps
-Transit,Bus tip,"East-side hikes: 2 / 2L then often 23 from Kahala Mall (or 1L). Windward / North Shore: 42 / E / W to Ala Moana then 52 / 60 / 65 / 67.",
+Transit,Bus tip,"East-side hikes: 2 / 2L then often 23 from Kahala Mall (or 1L). Windward / North Shore: 42 / E / W to Ala Moana then 52 / 60 / 65 / 67 / 671.",
+Transit,Uber when it pays off,"Use Uber for airport bags, last-mile trailheads, post-hard-hike returns, Pali lookout link, and sunrise when the first bus is too late. Otherwise TheBus keeps more money for food and time for nature.",
 Rideshare,Uber,"Use for Nov 30 arrival and Dec 10 departure with bags. Canadian account usually works; check US card fees.",https://www.uber.com
 Rideshare,Airport pickup,"Use the official pickup area at HNL. Allow extra time at night.",https://www.google.com/maps/search/?api=1&query=HNL+rideshare+pickup+Honolulu
 Hotel,Waikiki Malia,"2211 Kuhio Ave. Check-in from 10:10 PM on Nov 30. Check-out at 12:00 PM on Dec 10. Ask about bag storage.",https://www.google.com/maps/search/?api=1&query=Waikiki+Malia+by+Outrigger+2211+Kuhio+Ave
 Hotel,Hotel website,"Outrigger property page for phone, parking, and amenity details.",https://www.outrigger.com/hotels-resorts/hawaii/oahu/waikiki-malia-by-outrigger
+Near hotel free,Waikiki shoreline,"Kuhio Beach, Queen's Surf, and the sand in front of Waikiki — walk from Malia. Best free daily reset.",https://www.google.com/maps/search/?api=1&query=Kuhio+Beach+Waikiki
+Near hotel free,Kapiolani Park,"Lawn, shoreline path, and picnic space at the Diamond Head end of Waikiki. Pair with sunset.",https://www.google.com/maps/search/?api=1&query=Kapiolani+Park+Honolulu
+Near hotel free,Fort DeRussy Beach Park,"Calmer swim and open lawn toward the west end of Waikiki. Easy walk or short hop.",https://www.google.com/maps/search/?api=1&query=Fort+DeRussy+Beach+Park+Waikiki
+Near hotel free,Magic Island sunset,"Ala Moana Beach Park peninsula. Free sunset over the water. Bus 42 / E / W or short Uber. Be there by 5:30 PM in early December.",https://www.google.com/maps/search/?api=1&query=Magic+Island+Ala+Moana+Honolulu
+Near hotel free,Ala Wai Canal walk,"Evening stroll along the canal behind Waikiki. Flat and free.",https://www.google.com/maps/search/?api=1&query=Ala+Wai+Canal+Waikiki
+Near hotel free,Hilton fireworks,"When scheduled, watch free from the beach — check the week-of hotel or visitor listings.",https://www.google.com/maps/search/?api=1&query=Hilton+Hawaiian+Village+Waikiki
+Sun,December sunrise,"About 6:53 AM on Dec 1 to 6:58 AM on Dec 10 (HST). Confirm week-of.",https://www.timeanddate.com/sun/usa/honolulu
+Sun,December sunset,"About 5:48 to 5:50 PM early December. Civil dusk ~6:12 to 6:15 PM. Be on a beach by 5:30 PM for sunset.",https://www.timeanddate.com/sun/usa/honolulu
+Sun,Sunrise targets,"Diamond Head (booked slot), optional early Makapu'u if transit works, Tantalus on Dec 10.",
+Sun,Sunset targets,"Waikiki sand, Magic Island, Kapiolani shoreline — free and close to the hotel.",
+Weather,Rain rule of thumb,"Waikiki can stay dry while Manoa and windward valleys pour. Always check the Weather tab plus NWS Honolulu the morning of a hike.",https://www.weather.gov/hfo/
+Weather,Light trades / inland showers,"Keep Makapu'u, Diamond Head, Koko Head, and Sandy Beach — drier southeast / leeward-ish options.",
+Weather,Steady valley rain,"Swap Manoa Falls for town culture, Ala Moana swim, or east lookouts.",
+Weather,Island-wide Kona or front,"No exposed ridges (Koko, Pillbox, Kuliouou). Do Chinatown, optional museums, and beach walks between rain cells.",
+Weather,Mud or flash-flood risk,"Skip Manoa and Kuliouou. Paved Makapu'u is OK if not storming — watch slick asphalt on the descent.",
+Weather,Clear windward morning,"Prefer Lanikai, Ho'omaluhia, or North Shore that day.",
+Weather,How to use the Weather tab,"Open Weather in this app each morning. If valley rain is high, do a leeward or paved-east day; if trades are clean on the windward side, push Lanikai / gardens / North Shore forward.",
 Hikes,Diamond Head,"Self-guided crater hike. Book a State Parks slot (sunrise fills fast). Stay on the trail.",https://gostateparks.hawaii.gov
 Hikes,Koko Head Crater Stairs,"Steep railway ties in Koko Head District Park. Bring lots of water; start early; respect the neighborhood walk-in from the bus.",https://www.google.com/maps/search/?api=1&query=Koko+Crater+Stairs+trailhead+Honolulu
-Hikes,Kuliouou Ridge,"Free local ridge hike on the east side. Confirm trail status and use Maps Transit to the trailhead.",https://www.google.com/maps/search/?api=1&query=Kuliouou+Ridge+Trailhead+Honolulu
-Hikes,Manoa Falls,"Rainforest walk to the falls. Muddy after rain. Pair with Lyon Arboretum if open.",https://www.google.com/maps/search/?api=1&query=Manoa+Falls+Trailhead+Honolulu
+Hikes,Kuliouou Ridge,"Free local ridge hike on the east side — use as Makapu'u alternate or extra half-day. Confirm trail status; muddy after rain.",https://www.google.com/maps/search/?api=1&query=Kuliouou+Ridge+Trailhead+Honolulu
+Hikes,Manoa Falls,"Rainforest walk to the falls. Muddy after rain. Pair with Lyon Arboretum if open. Skip in heavy rain.",https://www.google.com/maps/search/?api=1&query=Manoa+Falls+Trailhead+Honolulu
 Hikes,Lyon Arboretum,"Quiet UH arboretum above Manoa. Check hours before you go.",https://manoa.hawaii.edu/lyonarboretum/
 Hikes,Makapu'u Lighthouse,"Paved coastal trail. Good winter shore whale watching without a cruise.",https://www.google.com/maps/search/?api=1&query=Makapuu+Lighthouse+Trail+Honolulu
 Hikes,Lanikai Pillbox,"Short steep ridge above Lanikai. Go early; carry out all trash.",https://www.google.com/maps/search/?api=1&query=Lanikai+Pillbox+Trail+Kailua
 Hikes,Trail etiquette,"Stay on marked trails, start early, pack water and reef-safe sunscreen, and do not block residential driveways.",https://www.honolulu.gov/dpr
 Nature,Ho'omaluhia Botanical Garden,"Free windward garden. Bring water and insect repellent.",https://www.google.com/maps/search/?api=1&query=Hoomaluhia+Botanical+Garden+Kaneohe
 Nature,Kawainui Marsh,"Wetland paths near Kailua. Pair with Ulupo Heiau.",https://www.google.com/maps/search/?api=1&query=Kawainui+Marsh+Kailua
-Nature,Waimea Bay,"North Shore swim and shore walk day. Watch surf conditions.",https://www.google.com/maps/search/?api=1&query=Waimea+Bay+North+Shore+Oahu
+Nature,Waimea Bay,"North Shore swim and shore walk day. Watch surf conditions — winter waves can be huge.",https://www.google.com/maps/search/?api=1&query=Waimea+Bay+North+Shore+Oahu
+Nature,Pipeline and Sunset Beach,"December big-wave viewing from shore only. Do not enter the water in large winter surf.",https://www.google.com/maps/search/?api=1&query=Banzai+Pipeline+North+Shore+Oahu
 Nature,Sandy Beach,"Powerful shore break near Hawaii Kai — look don't force a swim if unsure.",https://www.google.com/maps/search/?api=1&query=Sandy+Beach+Park+Honolulu
 Culture,Ulupo Heiau,"Free historic heiau by Kawainui. Be respectful; no climbing on structures.",https://www.google.com/maps/search/?api=1&query=Ulupo+Heiau+Kailua
 Culture,Nuuanu Pali Lookout,"Historic cliff pass viewpoint. Wind can be strong. Short rideshare is easiest from windward.",https://www.google.com/maps/search/?api=1&query=Nuuanu+Pali+Lookout
@@ -39,4 +58,3 @@ Packing,Clothes,"Lightweight layers, 2 swimsuits, rash guard, rain jacket, one n
 Packing,Shoes and gear,"Trail shoes, sandals, hat, sunglasses, reef-safe sunscreen, daypack, 1L+ water, towel, binoculars for whales.",
 Food,Local favorites,"Ono Seafood, Rainbow Drive-In, Leonard's, Helena's, Waiola, Matsumoto, Giovanni's or Romy's shrimp — counters and plate lunch, not tour packages.",
 Food,Coffee,"Waialua Estate (North Shore), Kalapawai Cafe (Kailua), Honolulu Coffee Company (Ala Moana).",
-Sun,Sunrise and sunset,"Check exact times for hike starts.",https://www.timeanddate.com/sun/usa/honolulu
